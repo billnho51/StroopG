@@ -5,10 +5,15 @@ using TMPro;
 
 public class gameplay : MonoBehaviour
 {
+    public TextMeshProUGUI largeText;
+    public TextMeshProUGUI scoreText;
 
+
+
+    private int points;
     public static bool isPlaying = false;
 
-    public TextMeshProUGUI largeText;
+
 
     //array for colors in the game
     Color[] colours = new Color[4];
@@ -16,7 +21,7 @@ public class gameplay : MonoBehaviour
     string[] colorNames = new string[4];
 
     public bool timerIsRunning;
-    public float timeRemaining = 6;
+    public float timeRemaining = 4;
     public GameObject gameUI;
     // Start is called before the first frame update
     void Start()
@@ -58,8 +63,7 @@ public class gameplay : MonoBehaviour
             }
             else
             {
-                Debug.Log("Time has run out!");
-                timeRemaining = 6;
+                timeRemaining = 4;
                 timerIsRunning = false;
                 pickRandomColor();
             }
@@ -159,12 +163,23 @@ public class gameplay : MonoBehaviour
                 {
                     largeText.color = Color.white;
                     largeText.text = "Correct :>";
+                    //updates points
+                    points += 1;
+                    scoreText.text = points.ToString();
 
                 }
                 else 
                 {
                     largeText.color = Color.white;
                     largeText.text = "Incorrect :<";
+                    if (points > 0)
+                    {
+                        points -= 1;
+                        scoreText.text = points.ToString();
+
+                    }
+
+
                 }
                 break;
             
@@ -173,12 +188,21 @@ public class gameplay : MonoBehaviour
                 {
                     largeText.color = Color.white;
                     largeText.text = "Correct :>";
+                    //updates points
+                    points += 1;
+                    scoreText.text = points.ToString();
 
                 }
                 else 
                 {
                     largeText.color = Color.white;
                     largeText.text = "Incorrect :<";
+                    if (points > 0)
+                    {
+                        points -= 1;
+                        scoreText.text = points.ToString();
+
+                    }
                 }
                 break;
             case "yellow":
@@ -186,12 +210,21 @@ public class gameplay : MonoBehaviour
                 {
                     largeText.color = Color.white;
                     largeText.text = "Correct :>";
+                    //updates points
+                    points += 1;
+                    scoreText.text = points.ToString();
 
                 }
                 else 
                 {
                     largeText.color = Color.white;
                     largeText.text = "Incorrect :<";
+                    if (points > 0)
+                    {
+                        points -= 1;
+                        scoreText.text = points.ToString();
+
+                    }
                 }
                 break;
             case "green":
@@ -199,12 +232,21 @@ public class gameplay : MonoBehaviour
                 {
                     largeText.color = Color.white;
                     largeText.text = "Correct :>";
+                    //updates points
+                    points += 1;
+                    scoreText.text = points.ToString();
 
                 }
                 else 
                 {
                     largeText.color = Color.white;
                     largeText.text = "Incorrect :<";
+                    if (points > 0)
+                    {
+                        points -= 1;
+                        scoreText.text = points.ToString();
+
+                    }
                 }
                 break;
             
