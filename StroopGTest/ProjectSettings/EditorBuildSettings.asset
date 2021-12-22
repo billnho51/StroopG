@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/DefaultTemplate/Scenes/SampleScene.unity
-    guid: d1c3109bdb54ad54c8a2b2838528e640
+    path: Assets/Project/Scene/menu.unity
+    guid: c91cce1e9997ac348a33e5c908fe9af3
+  - enabled: 1
+    path: Assets/Project/Scene/StroopG.unity
+    guid: 1349818886771c44194e180ec472e9e0
   m_configObjects: {}
