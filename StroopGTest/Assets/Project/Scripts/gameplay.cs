@@ -10,6 +10,7 @@ public class gameplay : MonoBehaviour
 
 
 
+
     private int points;
     public static bool isPlaying = false;
 
@@ -21,7 +22,7 @@ public class gameplay : MonoBehaviour
     string[] colorNames = new string[4];
 
     public bool timerIsRunning;
-    public float timeRemaining = 4;
+    public float timeRemaining = 1;
     public GameObject gameUI;
     // Start is called before the first frame update
     void Start()
@@ -45,25 +46,26 @@ public class gameplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        TMP_TextInfo textInfo = largeText.textInfo;
 
         if (timerIsRunning)
         {
             if (timeRemaining > 0)
             {
-                if (timeRemaining > 3)
+                if (timeRemaining > 0.5)
                 {
                     
                 }
                 
                 else
                 {
-                    largeText.text = timeRemaining.ToString("F0");
+                    //largeText.text = timeRemaining.ToString("F0");
                 }
                 timeRemaining -= Time.deltaTime;
             }
             else
             {
-                timeRemaining = 4;
+                timeRemaining = 1;
                 timerIsRunning = false;
                 pickRandomColor();
             }
