@@ -506,7 +506,7 @@ MonoBehaviour:
   largeText: {fileID: 1089201895}
   scoreText: {fileID: 237848224}
   timerIsRunning: 0
-  timeRemaining: 5
+  timeRemaining: 1
   gameUI: {fileID: 1826339739}
 --- !u!1 &614908428
 GameObject:

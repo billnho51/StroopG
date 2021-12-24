@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
@@ -14,5 +15,24 @@ public class MainMenu : MonoBehaviour
     void Update()
     {
         
+    }
+
+
+
+    public void play()
+    {
+        SceneManager.LoadScene("StroopG");
+    }
+
+    public void leaderBoard()
+    {
+
+    }
+
+    public void quit()
+    {
+        Debug.Log("Quitting game....");
+        //does not quit current play in unity editor
+        Application.Quit();
     }
 }
