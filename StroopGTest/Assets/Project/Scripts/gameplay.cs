@@ -8,6 +8,8 @@ public class gameplay : MonoBehaviour
     public TextMeshProUGUI largeText;
     public TextMeshProUGUI scoreText;
 
+    private testingAnimate shaking;
+
     bool hasTextChanged = false;
 
 
@@ -29,6 +31,9 @@ public class gameplay : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+
+        shaking = scoreText.GetComponent<testingAnimate>();
         //set up color
         colours[0] = Color.red;
         colours[1] = Color.green;
@@ -176,6 +181,7 @@ public class gameplay : MonoBehaviour
                 {
                     largeText.color = Color.white;
                     largeText.text = "Incorrect :<";
+                    shakeText();
                     if (points > 0)
                     {
                         points -= 1;
@@ -201,6 +207,7 @@ public class gameplay : MonoBehaviour
                 {
                     largeText.color = Color.white;
                     largeText.text = "Incorrect :<";
+                    shakeText();
                     if (points > 0)
                     {
                         points -= 1;
@@ -223,6 +230,7 @@ public class gameplay : MonoBehaviour
                 {
                     largeText.color = Color.white;
                     largeText.text = "Incorrect :<";
+                    shakeText();
                     if (points > 0)
                     {
                         points -= 1;
@@ -246,7 +254,6 @@ public class gameplay : MonoBehaviour
                     largeText.color = Color.white;
                     largeText.text = "Incorrect :<";
                     shakeText();
-                    
                     if (points > 0)
                     {
                         points -= 1;
@@ -265,13 +272,8 @@ public class gameplay : MonoBehaviour
 
     void shakeText()
     {
-        TMP_TextInfo textInfo = largeText.textInfo;
         
-        Vector3 currentPos = largeText.transform.position;
-        for (int i =0; i <15; i++){
-            largeText.transform.Translate(Random.Range(0,10),0,0);
-            largeText.transform.Translate(Random.Range(-1,-10),0,0);
-        }
-        Debug.Log("shaked");
+        shaking.setRun();
+        
     }
 }
