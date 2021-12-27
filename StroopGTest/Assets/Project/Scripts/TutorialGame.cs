@@ -2,19 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.SceneManagement;
 
-public class gameplay : MonoBehaviour
+public class TutorialGame : MonoBehaviour
 {
     public TextMeshProUGUI largeText;
     public TextMeshProUGUI scoreText;
-    public TextMeshProUGUI finalScore;
 
-    public GameObject durationTimer;
-
-    //private class for accessing and changing data
     private testingAnimate shaking;
-    private DurationBar duration;
 
     bool hasTextChanged = false;
 
@@ -30,16 +24,16 @@ public class gameplay : MonoBehaviour
     Color[] colours = new Color[4];
     //array for colors in text
     string[] colorNames = new string[4];
+
+    public bool timerIsRunning;
+    public float timeRemaining = 1;
     public GameObject gameUI;
-    public GameObject endUI;
     // Start is called before the first frame update
     void Start()
     {
 
-        //linking varibales with class to get constraints
+
         shaking = scoreText.GetComponent<testingAnimate>();
-        duration = durationTimer.GetComponent<DurationBar>();
-        
         //set up color
         colours[0] = Color.red;
         colours[1] = Color.green;
@@ -59,18 +53,31 @@ public class gameplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        bool timesUp = duration.gameDone();
+        TMP_TextInfo textInfo = largeText.textInfo;
 
-        if(timesUp == true)
+        if (timerIsRunning)
         {
-            gameUI.SetActive(false);
-            endUI.SetActive(true);
-            //set final score
-            finalScore.text = points.ToString();
-        
-            
-
+            if (timeRemaining > 0)
+            {
+                if (timeRemaining > 0.5)
+                {
+                    
+                }
+                
+                else
+                {
+                    //largeText.text = timeRemaining.ToString("F0");
+                }
+                timeRemaining -= Time.deltaTime;
+            }
+            else
+            {
+                timeRemaining = 1;
+                timerIsRunning = false;
+                pickRandomColor();
+            }
         }
+
 
 
         if (Input.GetKeyDown(KeyCode.P))
@@ -88,11 +95,11 @@ public class gameplay : MonoBehaviour
         }
     }
 
-    //Application Function
+
     void Resume()
     {
         gameUI.SetActive(false);
-        //Time.timeScale = 1f;
+        Time.timeScale = 1f;
         isPlaying = false;
 
     }
@@ -100,37 +107,18 @@ public class gameplay : MonoBehaviour
     void Pause()
     {
         gameUI.SetActive(true);
-        //Time.timeScale = 0f;
+        Time.timeScale = 0f;
         isPlaying = true;
         
     }
 
-    public void restart()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
-    }
-
-    public void mainMenu()
-    {
-        SceneManager.LoadScene("menu");
-
-    }
-
-    public void quit()
-    {
-        Debug.Log("Quitting game....");
-        //does not quit current play in unity editor
-        Application.Quit();
-    }
-
-    // game play funtions
     public void first()
     {
         Debug.Log("First button pressed");
         checkAnswer("red");
-        //timerIsRunning = true;
-        pickRandomColor();
+        timerIsRunning = true;
+        //pickRandomColor();
 
     }
 
@@ -138,8 +126,8 @@ public class gameplay : MonoBehaviour
     {
         Debug.Log("Second button pressed");
         checkAnswer("blue");
-        //timerIsRunning = true;
-        pickRandomColor();
+        timerIsRunning = true;
+        //pickRandomColor();
 
     }
 
@@ -147,8 +135,8 @@ public class gameplay : MonoBehaviour
     {
         Debug.Log("Third button pressed");
         checkAnswer("green");
-        //timerIsRunning = true;
-        pickRandomColor();
+        timerIsRunning = true;
+        //pickRandomColor();
 
     }
 
@@ -156,8 +144,8 @@ public class gameplay : MonoBehaviour
     {
         Debug.Log("Fourth button pressed");
         checkAnswer("yellow");
-        //timerIsRunning = true;
-        pickRandomColor();
+        timerIsRunning = true;
+        //pickRandomColor();
         
     }
 
@@ -182,8 +170,8 @@ public class gameplay : MonoBehaviour
             case "red":
                 if (largeText.color == Color.red)
                 {
-                    //largeText.color = Color.white;
-                    //largeText.text = "Correct :>";
+                    largeText.color = Color.white;
+                    largeText.text = "Correct :>";
                     //updates points
                     points += 1;
                     scoreText.text = points.ToString();
@@ -191,8 +179,8 @@ public class gameplay : MonoBehaviour
                 }
                 else 
                 {
-                    //largeText.color = Color.white;
-                    //largeText.text = "Incorrect :<";
+                    largeText.color = Color.white;
+                    largeText.text = "Incorrect :<";
                     shakeText();
                     if (points > 0)
                     {
@@ -208,8 +196,8 @@ public class gameplay : MonoBehaviour
             case "blue":
                 if (largeText.color == Color.blue)
                 {
-                    //largeText.color = Color.white;
-                    //largeText.text = "Correct :>";
+                    largeText.color = Color.white;
+                    largeText.text = "Correct :>";
                     //updates points
                     points += 1;
                     scoreText.text = points.ToString();
@@ -217,8 +205,8 @@ public class gameplay : MonoBehaviour
                 }
                 else 
                 {
-                    //largeText.color = Color.white;
-                    //largeText.text = "Incorrect :<";
+                    largeText.color = Color.white;
+                    largeText.text = "Incorrect :<";
                     shakeText();
                     if (points > 0)
                     {
@@ -231,8 +219,8 @@ public class gameplay : MonoBehaviour
             case "yellow":
                 if (largeText.color == Color.yellow)
                 {
-                    //largeText.color = Color.white;
-                    //largeText.text = "Correct :>";
+                    largeText.color = Color.white;
+                    largeText.text = "Correct :>";
                     //updates points
                     points += 1;
                     scoreText.text = points.ToString();
@@ -240,8 +228,8 @@ public class gameplay : MonoBehaviour
                 }
                 else 
                 {
-                    //largeText.color = Color.white;
-                    //largeText.text = "Incorrect :<";
+                    largeText.color = Color.white;
+                    largeText.text = "Incorrect :<";
                     shakeText();
                     if (points > 0)
                     {
@@ -254,8 +242,8 @@ public class gameplay : MonoBehaviour
             case "green":
                 if (largeText.color == Color.green)
                 {
-                    //largeText.color = Color.white;
-                    //largeText.text = "Correct :>";
+                    largeText.color = Color.white;
+                    largeText.text = "Correct :>";
                     //updates points
                     points += 1;
                     scoreText.text = points.ToString();
@@ -263,8 +251,8 @@ public class gameplay : MonoBehaviour
                 }
                 else 
                 {
-                    //largeText.color = Color.white;
-                    //largeText.text = "Incorrect :<";
+                    largeText.color = Color.white;
+                    largeText.text = "Incorrect :<";
                     shakeText();
                     if (points > 0)
                     {
@@ -287,11 +275,5 @@ public class gameplay : MonoBehaviour
         
         shaking.setRun();
         
-    }
-
-    public int getPoints()
-    {
-        return this.points;
-
     }
 }
