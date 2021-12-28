@@ -10,6 +10,7 @@ public class DurationBar : MonoBehaviour
     private float timeRemaining = 60f;
     private float maxTime = 60f;
     public float fillSpeed = 0.5f;
+    private bool gameEnd = false;
 
     private void Awake() 
     {
@@ -37,8 +38,16 @@ public class DurationBar : MonoBehaviour
         else
         {
             Debug.Log("Time has run out");
+            gameEnd = true;
 
         }
     }
+
+
+    public bool gameDone(){
+        return gameEnd;
+
+    }
+
 
 }

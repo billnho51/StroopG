@@ -130,7 +130,8 @@ namespace TMPro.Examples
                         float randomScale = Random.Range(0.995f - 0.001f * ScaleMultiplier, 1.005f + 0.001f * ScaleMultiplier);
 
                         // Setup the matrix rotation.
-                        matrix = Matrix4x4.TRS(Vector3.one, rotation, Vector3.one * randomScale);
+                        matrix = Matrix4x4.TRS(Vector3.one, rotation, Vector3.one);
+                        
 
                         // Apply the matrix TRS to the individual characters relative to the center of the current line.
                         copyOfVertices[materialIndex][vertexIndex + 0] = matrix.MultiplyPoint3x4(copyOfVertices[materialIndex][vertexIndex + 0]);
