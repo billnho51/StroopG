@@ -10,7 +10,6 @@ public class TutorialGame : MonoBehaviour
 
     private testingAnimate shaking;
 
-    bool hasTextChanged = false;
 
 
 

@@ -16,12 +16,9 @@ public class gameplay : MonoBehaviour
     private testingAnimate shaking;
     private DurationBar duration;
 
-    bool hasTextChanged = false;
-
-
-
 
     private int points;
+    private bool timesUp;
     public static bool isPlaying = false;
 
 
@@ -59,18 +56,19 @@ public class gameplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        bool timesUp = duration.gameDone();
+        timesUp = duration.gameDone();
 
-        if(timesUp == true)
-        {
-            gameUI.SetActive(false);
-            endUI.SetActive(true);
-            //set final score
-            finalScore.text = points.ToString();
+        // if(timesUp == true)
+        // {
+
+        //     gameUI.SetActive(false);
+        //     endUI.SetActive(true);
+        //     //set final score
+        //     finalScore.text = points.ToString();
         
             
 
-        }
+        // }
 
 
         if (Input.GetKeyDown(KeyCode.P))
@@ -161,16 +159,30 @@ public class gameplay : MonoBehaviour
         
     }
 
-
+    //going to next question
     private void pickRandomColor()
     {
-        //get color name from string list
-        string randomColor = colorNames[Random.Range(0, colorNames.Length)];
+        if (timesUp == true)
+        {
+            gameUI.SetActive(false);
+            endUI.SetActive(true);
+            //set final score
+            finalScore.text = points.ToString();
 
-        //set color variable from color list
-        largeText.color = colours[Random.Range(0, colours.Length)];
-        //set color text
-        largeText.text = randomColor;
+
+        }
+        else
+        {
+            //get color name from string list
+            string randomColor = colorNames[Random.Range(0, colorNames.Length)];
+
+            //set color variable from color list
+            largeText.color = colours[Random.Range(0, colours.Length)];
+            //set color text
+            largeText.text = randomColor;
+
+        }
+
         
 
     }
