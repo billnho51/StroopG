@@ -2,36 +2,45 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class TutorialGame : MonoBehaviour
 {
+    //public objects for indicating text to make changes to
     public TextMeshProUGUI largeText;
     public TextMeshProUGUI scoreText;
-
     private testingAnimate shaking;
+    public GameObject gameUI;
+    public GameObject EndUI;
 
 
 
-
-
+    //private variables to keep track score from each play
     private int points;
+    private int counter = 0;
     public static bool isPlaying = false;
 
-
+    //timer during gameplay
+    private bool timerIsRunning;
+    //timer at start of tutorial to show description
+    public bool initialTimerRunning;
+    private float timeRemaining = 5;
+    public float initialTimeRemaining = 10;
 
     //array for colors in the game
     Color[] colours = new Color[4];
     //array for colors in text
     string[] colorNames = new string[4];
 
-    public bool timerIsRunning;
-    public float timeRemaining = 1;
-    public GameObject gameUI;
+
     // Start is called before the first frame update
     void Start()
     {
+        //set up activeUI
+        gameUI.SetActive(true);
+        EndUI.SetActive(false);
 
-
+        //linking varibales with class to get constraints
         shaking = scoreText.GetComponent<testingAnimate>();
         //set up color
         colours[0] = Color.red;
@@ -44,54 +53,66 @@ public class TutorialGame : MonoBehaviour
         colorNames[1] = "blue";
         colorNames[2] = "green";
         colorNames[3] = "yellow";
-
-        pickRandomColor();
+        //start initial timer
+        initialTimerRunning = true;
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        TMP_TextInfo textInfo = largeText.textInfo;
-
-        if (timerIsRunning)
+        //run innitial timer for 10 secs - change from description to countdown when hit 5
+        if (initialTimerRunning)
         {
-            if (timeRemaining > 0)
+            if (initialTimeRemaining > 0)
             {
-                if (timeRemaining > 0.5)
+                
+                if (initialTimeRemaining > 5)
                 {
                     
                 }
                 
                 else
                 {
-                    //largeText.text = timeRemaining.ToString("F0");
+                    largeText.text = initialTimeRemaining.ToString("F0");
+                }
+                initialTimeRemaining -= Time.deltaTime;
+
+            }
+            //start the game after 10 sec
+            else
+            {
+                initialTimerRunning = false;
+                pickRandomColor();
+            }
+
+
+        }
+
+        //run timer for 5 secs - show player results of their answer for 3 secs and change to countdown at 3
+        if (timerIsRunning)
+        {
+            if (timeRemaining > 0)
+            {
+                if (timeRemaining > 3)
+                {
+                    
+                }
+                
+                else
+                {
+                    largeText.text = timeRemaining.ToString("F0");
                 }
                 timeRemaining -= Time.deltaTime;
             }
             else
             {
-                timeRemaining = 1;
+                timeRemaining = 5;
                 timerIsRunning = false;
                 pickRandomColor();
             }
         }
 
-
-
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            if(isPlaying)
-            {
-                Resume();
-
-            }
-            else
-            {
-                Pause();
-            }
-
-        }
     }
 
 
@@ -111,53 +132,126 @@ public class TutorialGame : MonoBehaviour
         
     }
 
+        public void restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
+    }
+
+    public void mainMenu()
+    {
+        SceneManager.LoadScene("menu");
+
+    }
+
+    public void quit()
+    {
+        Debug.Log("Quitting game....");
+        //does not quit current play in unity editor
+        Application.Quit();
+    }
+
+
+    // game play funtions
+    //Each buttons has its specific case to check when pressed
+    //check answer to update score board
+    //change to next questions
     public void first()
     {
-        Debug.Log("First button pressed");
-        checkAnswer("red");
-        timerIsRunning = true;
-        //pickRandomColor();
+        //do nothing while countdown
+        if (timerIsRunning || initialTimerRunning)
+        {
+
+
+        }
+        else
+        {
+            //Debug.Log("First button pressed");
+            checkAnswer("red");
+            timerIsRunning = true;
+
+        }
+
 
     }
 
     public void second()
     {
-        Debug.Log("Second button pressed");
-        checkAnswer("blue");
-        timerIsRunning = true;
-        //pickRandomColor();
+        //do nothing while countdown
+        if (timerIsRunning || initialTimerRunning)
+        {
+
+
+        }
+        else
+        {
+            //Debug.Log("Second button pressed");
+            checkAnswer("blue");
+            timerIsRunning = true;
+        }
+        
 
     }
 
     public void third()
     {
-        Debug.Log("Third button pressed");
-        checkAnswer("green");
-        timerIsRunning = true;
-        //pickRandomColor();
+        //do nothing while countdown
+        if (timerIsRunning || initialTimerRunning)
+        {
+
+
+        }
+        else
+        {
+            //Debug.Log("Third button pressed");
+            checkAnswer("green");
+            timerIsRunning = true;
+        }
+
 
     }
 
     public void fourth()
     {
-        Debug.Log("Fourth button pressed");
-        checkAnswer("yellow");
-        timerIsRunning = true;
-        //pickRandomColor();
-        
+        //do nothing while countdown
+        if (timerIsRunning || initialTimerRunning)
+        {
+
+
+        }
+        else
+        {
+            //Debug.Log("Fourth button pressed");
+            checkAnswer("yellow");
+            timerIsRunning = true;    
+        }
+
     }
 
 
+    //going to next question
     private void pickRandomColor()
     {
-        //get color name from string list
-        string randomColor = colorNames[Random.Range(0, colorNames.Length)];
+        //Change active UI after 5 questions
+        if (counter > 5)
+        {
+            gameUI.SetActive(false);
+            EndUI.SetActive(true);
 
-        //set color variable from color list
-        largeText.color = colours[Random.Range(0, colours.Length)];
-        //set color text
-        largeText.text = randomColor;
+        }
+        //if not - update new questions
+        else
+        {
+            //get color name from string list
+            string randomColor = colorNames[Random.Range(0, colorNames.Length)];
+
+            //set color variable from color list
+            largeText.color = colours[Random.Range(0, colours.Length)];
+            //set color text
+            largeText.text = randomColor;
+
+        }
+        
         
 
     }
@@ -165,6 +259,10 @@ public class TutorialGame : MonoBehaviour
 
     private void checkAnswer(string colorN)
     {
+        //updates points base on correct or wrong
+        //increase counter to keep track of questions answered
+        //change text base on whether the answer is correct or false
+        counter++;
         switch (colorN){
             case "red":
                 if (largeText.color == Color.red)

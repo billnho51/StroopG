@@ -58,7 +58,7 @@ public class gameplay : MonoBehaviour
         gameUI.SetActive(true);
         pauseUI.SetActive(false);
         endUI.SetActive(false);
-
+        //initiate the game
         pickRandomColor();
         
 
@@ -121,7 +121,7 @@ public class gameplay : MonoBehaviour
         Application.Quit();
     }
 
-
+    //add constrainsts when hover above clickable object
     public void OnMouseEnter() 
     {
         mouseOnobject = true;     
@@ -133,38 +133,37 @@ public class gameplay : MonoBehaviour
     }
 
     // game play funtions
+    //Each buttons has its specific case to check when pressed
+    //check answer to update score board
+    //change to next questions
     public void first()
     {
-        Debug.Log("First button pressed");
+        //Debug.Log("First button pressed");
         checkAnswer("red");
-        //timerIsRunning = true;
         pickRandomColor();
 
     }
 
     public void second()
     {
-        Debug.Log("Second button pressed");
+        //Debug.Log("Second button pressed");
         checkAnswer("blue");
-        //timerIsRunning = true;
         pickRandomColor();
 
     }
 
     public void third()
     {
-        Debug.Log("Third button pressed");
+        //Debug.Log("Third button pressed");
         checkAnswer("green");
-        //timerIsRunning = true;
         pickRandomColor();
 
     }
 
     public void fourth()
     {
-        Debug.Log("Fourth button pressed");
+        //Debug.Log("Fourth button pressed");
         checkAnswer("yellow");
-        //timerIsRunning = true;
         pickRandomColor();
         
     }
@@ -172,6 +171,7 @@ public class gameplay : MonoBehaviour
     //going to next question
     private void pickRandomColor()
     {
+        //Cahnge active UI and update final score board after 60 secs
         if (timesUp == true)
         {
             gameUI.SetActive(false);
@@ -181,6 +181,7 @@ public class gameplay : MonoBehaviour
 
 
         }
+        //if not update the new color
         else
         {
             //get color name from string list
@@ -200,21 +201,18 @@ public class gameplay : MonoBehaviour
 
     private void checkAnswer(string colorN)
     {
+        //updates points base on correct or wrong
         switch (colorN){
             case "red":
                 if (largeText.color == Color.red)
                 {
-                    //largeText.color = Color.white;
-                    //largeText.text = "Correct :>";
-                    //updates points
+                    
                     points += 1;
                     scoreText.text = points.ToString();
 
                 }
                 else 
                 {
-                    //largeText.color = Color.white;
-                    //largeText.text = "Incorrect :<";
                     shakeText();
                     if (points > 0)
                     {
@@ -230,8 +228,6 @@ public class gameplay : MonoBehaviour
             case "blue":
                 if (largeText.color == Color.blue)
                 {
-                    //largeText.color = Color.white;
-                    //largeText.text = "Correct :>";
                     //updates points
                     points += 1;
                     scoreText.text = points.ToString();
@@ -239,8 +235,6 @@ public class gameplay : MonoBehaviour
                 }
                 else 
                 {
-                    //largeText.color = Color.white;
-                    //largeText.text = "Incorrect :<";
                     shakeText();
                     if (points > 0)
                     {
@@ -253,8 +247,6 @@ public class gameplay : MonoBehaviour
             case "yellow":
                 if (largeText.color == Color.yellow)
                 {
-                    //largeText.color = Color.white;
-                    //largeText.text = "Correct :>";
                     //updates points
                     points += 1;
                     scoreText.text = points.ToString();
@@ -262,8 +254,6 @@ public class gameplay : MonoBehaviour
                 }
                 else 
                 {
-                    //largeText.color = Color.white;
-                    //largeText.text = "Incorrect :<";
                     shakeText();
                     if (points > 0)
                     {
@@ -276,8 +266,6 @@ public class gameplay : MonoBehaviour
             case "green":
                 if (largeText.color == Color.green)
                 {
-                    //largeText.color = Color.white;
-                    //largeText.text = "Correct :>";
                     //updates points
                     points += 1;
                     scoreText.text = points.ToString();
@@ -285,8 +273,6 @@ public class gameplay : MonoBehaviour
                 }
                 else 
                 {
-                    //largeText.color = Color.white;
-                    //largeText.text = "Incorrect :<";
                     shakeText();
                     if (points > 0)
                     {

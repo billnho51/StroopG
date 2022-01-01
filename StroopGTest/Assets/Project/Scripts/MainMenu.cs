@@ -24,8 +24,9 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("StroopG");
     }
 
-    public void leaderBoard()
+    public void tutorial()
     {
+        SceneManager.LoadScene("Tutorial");
 
     }
 

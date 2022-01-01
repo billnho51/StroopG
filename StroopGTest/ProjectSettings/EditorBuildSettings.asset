@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Project/Scene/StroopG.unity
     guid: 1349818886771c44194e180ec472e9e0
+  - enabled: 1
+    path: Assets/Project/Scene/Tutorial.unity
+    guid: 17a7b6ee8ef07504c8bd6260cb1dc0c5
   m_configObjects: {}
